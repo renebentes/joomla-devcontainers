@@ -1,5 +1,11 @@
 #!/bin/bash
 TEMPLATE_ID="$1"
+
+if [ "${TEMPLATE_ID}" == "" ]; then
+    echo "Template name is missing"
+    exit 1
+fi
+
 set -e
 
 SRC_DIR="/tmp/${TEMPLATE_ID}"

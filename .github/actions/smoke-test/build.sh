@@ -1,9 +1,19 @@
 #!/bin/bash
 TEMPLATE_ID="$1"
 
+if [ "${TEMPLATE_ID}" = "" ]; then
+    echo "Template name is missing"
+    exit 1
+fi
+
 set -e
 
 shopt -s dotglob
+
+if [ ! -d "src/${TEMPLATE_ID}" ]; then
+    echo "Template '${TEMPLATE_ID}' is missing a source folder"
+    exit 1
+fi
 
 SRC_DIR="/tmp/${TEMPLATE_ID}"
 cp -R "src/${TEMPLATE_ID}" "${SRC_DIR}"
@@ -36,6 +46,11 @@ if [ "${OPTION_PROPERTY}" != "" ] && [ "${OPTION_PROPERTY}" != "null" ] ; then
 fi
 
 popd
+
+if [ ! -d "test/${TEMPLATE_ID}" ]; then
+    echo "Template '${TEMPLATE_ID}' is missing a test folder"
+    exit 1
+fi
 
 TEST_DIR="test/${TEMPLATE_ID}"
 if [ -d "${TEST_DIR}" ] ; then
