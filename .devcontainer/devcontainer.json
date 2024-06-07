@@ -11,7 +11,8 @@
         "mads-hartmann.bash-ide-vscode",
         "dbaeumer.vscode-eslint",
         "editorconfig.editorconfig",
-        "foxundermoon.shell-format"
+        "foxundermoon.shell-format",
+        "esbenp.prettier-vscode"
       ]
     }
   },
