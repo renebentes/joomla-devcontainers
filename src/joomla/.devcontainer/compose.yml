@@ -1,0 +1,42 @@
+name: joomla-devcontainer
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../..:/workspaces:cached
+
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: ${JOOMLA_DB_USER:-joomla}
+      JOOMLA_DB_PASSWORD: ${JOOMLA_DB_PASSWORD:-joomla}
+      JOOMLA_DB_NAME: ${JOOMLA_DB_NAME:-joomladb}
+      JOOMLA_SITE_NAME: ${JOOMLA_SITE_NAME:-Demo}
+      JOOMLA_ADMIN_USER: ${JOOMLA_ADMIN_USER:-Administrator}
+      JOOMLA_ADMIN_USERNAME: ${JOOMLA_ADMIN_USERNAME:-joomladmin}
+      JOOMLA_ADMIN_PASSWORD: ${JOOMLA_ADMIN_PASSWORD:-MyStr0ngP4ssw0rd}
+      JOOMLA_ADMIN_EMAIL: ${JOOMLA_ADMIN_EMAIL:-demo@joomla.org}
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: ${JOOMLA_DB_PASSWORD:-joomla}
+      MARIADB_DATABASE: ${JOOMLA_DB_NAME:-joomladb}
+      MARIADB_USER: ${JOOMLA_DB_USER:-joomla}
+      MARIADB_PASSWORD: ${JOOMLA_DB_PASSWORD:-joomla}
+    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward MariaDB locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+volumes:
+  mariadb-data:

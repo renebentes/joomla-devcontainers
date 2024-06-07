@@ -1,0 +1,6 @@
+{
+  "name": "Joomla Config",
+  "id": "joomla-config",
+  "description": "Configure permissions for Joomla! Extensions development.",
+  "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

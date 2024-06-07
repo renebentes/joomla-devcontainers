@@ -1,0 +1,23 @@
+{
+  "id": "joomla",
+  "name": "Joomla",
+  "description": "A devcontainer for Joomla! Extensions development. Includes PHP, MariaDB, Node.js",
+  "documentationURL": "https://github.com/renebentes/joomla-devcontainers/tree/main/src/joomla",
+  "licenseURL": "https://github.com/renebentes/joomla-devcontainers/blob/main/LICENSE",
+  "publisher": "Rene Bentes",
+  "options": {
+    "imageVariant": {
+      "type": "string",
+      "description": "Joomla! version:",
+      "proposals": [
+        "5.1-php8.3-apache",
+        "5.1-php8.2-apache",
+        "5.1-php8.1-apache",
+        "4.4-php8.2-apache",
+        "4.4-php8.1-apache"
+      ],
+      "default": "5.1-php8.2-apache"
+    }
+  },
+  "platforms": ["Joomla", "PHP", "MariaDB (MySQL Compatible)"]
+}
