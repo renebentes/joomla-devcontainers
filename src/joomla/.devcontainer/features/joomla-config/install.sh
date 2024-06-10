@@ -11,6 +11,13 @@ fi
 
 usermod -aG www-data ${USERNAME}
 
-chmod -R g+w /var/www/html
+WEBDIR=/var/www/html
+cp -r /usr/src/joomla/* ${WEBDIR}
+
+# NOTE: The "Indexes" option is disabled in the php:apache base image so remove it as we enable .htaccess
+sed -r 's/^(Options -Indexes.*)$/#\1/' ${WEBDIR}/htaccess.txt >${WEBDIR}/.htaccess
+
+chown -R www-data:www-data ${WEBDIR}
+chmod -R g+w ${WEBDIR}
 
 echo -e "Done!"

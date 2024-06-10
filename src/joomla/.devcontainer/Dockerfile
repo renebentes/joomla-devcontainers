@@ -19,7 +19,3 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.client_port = 9000" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && rm -rf /tmp/pear
-
-ENTRYPOINT [ "/entrypoint.sh" ]
-
-CMD [ "apache2-foreground" ]
