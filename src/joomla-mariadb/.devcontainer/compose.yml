@@ -1,4 +1,5 @@
-name: joomla-devcontainer
+# name: joomla-devcontainer
+version: '3.9'
 
 services:
   app:
