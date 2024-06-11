@@ -1,10 +1,10 @@
 {
-  "id": "joomla",
-  "name": "Joomla",
+  "id": "joomla-mariadb",
+  "name": "Joomla & MariaDB",
   "description": "A devcontainer for Joomla! Extensions development. Includes PHP, MariaDB, Node.js",
   "documentationURL": "https://github.com/renebentes/joomla-devcontainers/tree/main/src/joomla",
   "licenseURL": "https://github.com/renebentes/joomla-devcontainers/blob/main/LICENSE",
-  "publisher": "Rene Bentes",
+  "publisher": "Rene Bentes Pinto",
   "options": {
     "imageVariant": {
       "type": "string",

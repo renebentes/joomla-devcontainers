@@ -12,7 +12,7 @@ jobs:
         id: filter
         with:
           filters: |
-            joomla: ./**/joomla/**
+            joomla-mariadb: ./**/joomla-mariadb/**
 
   test:
     needs: [detect-changes]
