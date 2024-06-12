@@ -1,0 +1,40 @@
+{
+  "name": "Joomla DevContainer",
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": "."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "true",
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000",
+      "upgradePackages": "true"
+    },
+    "./features/joomla-config": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "intelephense.environment.includePaths": ["/var/www/html"]
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "xdebug.php-debug"
+      ]
+    }
+  },
+  // Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode"
+}
