@@ -1,7 +1,6 @@
 {
   "name": "Joomla Config",
   "id": "joomla-config",
-  "version": "1.0.0",
   "description": "Prepare Joomla! CMS and fix permissions.",
   "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
 }
