@@ -12,7 +12,7 @@
       "userGid": "1000",
       "upgradePackages": "true"
     },
-    "./features/joomla-config": {},
+    "./local-features/joomla-config": {},
     "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers/features/git:1": {}
   },

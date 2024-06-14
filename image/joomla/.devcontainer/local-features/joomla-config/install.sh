@@ -12,7 +12,9 @@ fi
 usermod -aG www-data ${USERNAME}
 
 WEBDIR=/var/www/html
-cp -r /usr/src/joomla/* ${WEBDIR}
+
+rm -r ${WEBDIR}
+ln -s /usr/src/joomla ${WEBDIR}
 
 # NOTE: The "Indexes" option is disabled in the php:apache base image so remove it as we enable .htaccess
 sed -r 's/^(Options -Indexes.*)$/#\1/' ${WEBDIR}/htaccess.txt >${WEBDIR}/.htaccess
