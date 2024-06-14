@@ -20,4 +20,4 @@ jobs:
       - name: Test image
         id: test_image
         shell: bash
-        run: ./.github/action/smoke-test/test.sh joomla
+        run: ./.github/actions/smoke-test/test.sh joomla
