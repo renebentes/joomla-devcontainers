@@ -1,0 +1,23 @@
+name: "CI - Test Image"
+on:
+  pull_request:
+    paths:
+      - image/joomla/**
+      - .github/workflows/test-image-pr.yaml
+      - .github/actions/**
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        id: build_image
+        shell: bash
+        run: ./.github/actions/smoke-image/build.sh joomla
+
+      - name: Test image
+        id: test_image
+        shell: bash
+        run: ./.github/action/smoke-test/test.sh joomla
