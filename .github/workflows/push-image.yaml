@@ -1,0 +1,30 @@
+name: Publish prebuild image
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  docker:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: hub.docker.com
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository}}
+          cacheFrom: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository}}
+          push: always
