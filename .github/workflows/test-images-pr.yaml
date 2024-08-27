@@ -1,23 +1,32 @@
 name: "CI - Test Image"
 on:
   pull_request:
-    paths:
-      - image/joomla/**
-      - .github/workflows/test-image-pr.yaml
-      - .github/actions/**
 
 jobs:
-  smoke-test:
+  detect-changes:
     runs-on: ubuntu-latest
+    outputs:
+      images: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            joomla: ./**/images/joomla/**
+
+  test:
+    needs: [detect-changes]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        images: ${{ fromJSON(needs.detect-changes.outputs.images) }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build image
-        id: build_image
-        shell: bash
-        run: ./.github/actions/smoke-image/build.sh joomla
-
-      - name: Test image
-        id: test_image
-        shell: bash
-        run: ./.github/actions/smoke-test/test.sh joomla
+      - name: Smoke test for '${{ matrix.images }}'
+        id: smoke_test
+        uses: ./.github/actions/smoke-test
+        with:
+          template: "${{ matrix.images }}"
+          type: "images"
