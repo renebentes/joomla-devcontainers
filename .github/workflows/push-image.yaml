@@ -28,6 +28,6 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           subFolder: image/joomla
-          imageName: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository}}
-          cacheFrom: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository}}
+          imageName: ${{ env.REGISTRY }}/${{ github.repository}}
+          cacheFrom: ${{ env.REGISTRY }}/${{ github.repository}}
           push: always
