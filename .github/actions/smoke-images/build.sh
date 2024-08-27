@@ -1,13 +1,15 @@
 #!/bin/bash
 IMAGE="$1"
 
+BASE_DIR="images"
+
 if [ "${IMAGE}" = "" ]; then
     echo "Image name is missing"
     exit 1
 fi
 
-if [ ! -d "image/${IMAGE}" ]; then
-    echo "Image '${IMAGE}' is missing a source folder"
+if [ ! -d "src/${BASE_DIR}/${IMAGE}" ]; then
+    echo "Resource '${IMAGE}' is missing a source folder"
     exit 1
 fi
 
@@ -15,9 +17,9 @@ set -e
 
 echo "(*) Preparing source"
 SRC_DIR="/tmp/${IMAGE}"
-cp -r "image/${IMAGE}" "${SRC_DIR}"
+cp -r "${BASE_DIR}/${IMAGE}" "${SRC_DIR}"
 
-TEST_DIR="test/${IMAGE}"
+TEST_DIR="test/images/${IMAGE}"
 if [ -d "${TEST_DIR}" ]; then
     echo "(*) Copying test folder"
     DEST_DIR="${SRC_DIR}/test-project"
