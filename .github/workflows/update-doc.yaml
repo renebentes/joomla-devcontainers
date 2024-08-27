@@ -1,4 +1,4 @@
-name: "Release Dev Container Templates"
+name: "Update Documentation"
 on:
   workflow_dispatch:
   push:
@@ -6,19 +6,20 @@ on:
       - main
 
 jobs:
-  deploy:
+  generate:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
-      packages: write
+      contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: "Publish Templates"
+      - name: "Generate Documentation"
         uses: devcontainers/action@v1
         with:
-          publish-templates: "true"
+          generate-docs: "true"
           base-path-to-templates: "./src/templates"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,7 +37,7 @@ jobs:
           git config --global user.name github-actions[bot]
           git config pull.rebase false
 
-          branch=automated-documentation-update-$GITHUB_RUN_ID
+          branch=docs/automated-documentation-update-$GITHUB_RUN_ID
           git checkout -b $branch
           message='Automated documentation update'
 
