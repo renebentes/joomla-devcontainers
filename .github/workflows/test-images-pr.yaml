@@ -1,4 +1,4 @@
-name: "CI - Test Templates"
+name: "CI - Test Image"
 on:
   pull_request:
 
@@ -6,13 +6,13 @@ jobs:
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      templates: ${{ steps.filter.outputs.changes }}
+      images: ${{ steps.filter.outputs.changes }}
     steps:
       - uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
-            joomla-mariadb: ./**/joomla-mariadb/**
+            joomla: ./**/images/joomla/**
 
   test:
     needs: [detect-changes]
@@ -20,13 +20,13 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        templates: ${{ fromJSON(needs.detect-changes.outputs.templates) }}
+        images: ${{ fromJSON(needs.detect-changes.outputs.images) }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Smoke test for '${{ matrix.templates }}'
+      - name: Smoke test for '${{ matrix.images }}'
         id: smoke_test
         uses: ./.github/actions/smoke-test
         with:
-          template: "${{ matrix.templates }}"
-          type: "templates"
+          template: "${{ matrix.images }}"
+          type: "images"

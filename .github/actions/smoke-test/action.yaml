@@ -1,7 +1,10 @@
 name: "Smoke test"
 inputs:
-  template:
-    description: "Template to test"
+  resource:
+    description: "Resource to test"
+    required: true
+  type:
+    description: "Resource type"
     required: true
 
 runs:
@@ -11,12 +14,12 @@ runs:
       id: checkout_release
       uses: actions/checkout@v4
 
-    - name: Build template
-      id: build_template
+    - name: Build resource
+      id: build_resource
       shell: bash
-      run: ${{ github.action_path }}/build.sh ${{ inputs.template }}
+      run: ${{ github.action_path }}/build.sh ${{ inputs.resource }} ${{ inputs.type }}
 
-    - name: Test template
-      id: test_template
+    - name: Test resource
+      id: test_resource
       shell: bash
-      run: ${{ github.action_path }}/test.sh  ${{ inputs.template }}
+      run: ${{ github.action_path }}/test.sh  ${{ inputs.resource }} ${{ inputs.type }}
